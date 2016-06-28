@@ -139,20 +139,20 @@ bluez在Android中的使用，需要经过Android的bluez适配层的封装来�
 接下来主要描述了怎样使用Android蓝牙技术,包括: 建立蓝牙,查找有效的配对设备, 链接设备,发送以及传输数据
 
 一般蓝牙技术开发Android的几个概念:
-. BluetoothAdapter:  BluetoothAdapter是蓝牙设备使用的主要入口,使用BluetoothAdapter可以发现其他的蓝牙设备,找到一配对的设备,使用一个一直的MAC地址初始化
+- [ ]  BluetoothAdapter:  BluetoothAdapter是蓝牙设备使用的主要入口,使用BluetoothAdapter可以发现其他的蓝牙设备,找到一配对的设备,使用一个一直的MAC地址初始化
 一个BluetoothDevice,并且通过监听其他设备的通讯来创建BluetoothServerSocket
-. BluetoothSocket:  蓝牙socket, APP使用这个socket带来的连接通过InputStream和OutStream来交换数据
-. BluetoothServerSocket: 一个ServerSocket可以用来监听请求接入,为了能连接两个Android设备,其中一个设备必须打开server socket,当一个远程的蓝牙设备
+- [ ]  BluetoothSocket:  蓝牙socket, APP使用这个socket带来的连接通过InputStream和OutStream来交换数据
+- [ ]  BluetoothServerSocket: 一个ServerSocket可以用来监听请求接入,为了能连接两个Android设备,其中一个设备必须打开server socket,当一个远程的蓝牙设备
 向该设备发起一个连接请求时,该server socket 将会返回一个BluetoothSocket
-. BluetoothClass:  描述了一个通常的蓝牙设备能力,包括字符characteristics   （只读）,定义了一个设备的大部分和minor的设备clas,然而,这个不仅仅是描述了蓝牙设备profile
+- [ ]  BluetoothClass:  描述了一个通常的蓝牙设备能力,包括字符characteristics   （只读）,定义了一个设备的大部分和minor的设备clas,然而,这个不仅仅是描述了蓝牙设备profile
 和服务支持,  在隐藏设备类型也很有作用。
 
 另外,蓝牙规范:
-. BluetoothProfile: 一个代表了蓝牙描述规范的接口。 后面需要实现的蓝牙规格需要实现该接口。
-. BluetoothHeadset: 蓝牙手持设备在移动设备上的支持
-. BluetoothA2dp: Advanced Audio distribution Profile. 定义了一个蓝牙设备之间通信的高数据流的通信描述
-. BluetoothHealth: 描述了一个控制蓝牙服务的健康设备描述  这三个是蓝牙接口规格在Android中三个系统实现实例。
-. BluetoothProfile.ServiceListener  断开和连接service的连接服务时, 这个接口就知会BluetoothProfile IPC 客户端。用于BluetoothProfile
+- [ ]  BluetoothProfile: 一个代表了蓝牙描述规范的接口。 后面需要实现的蓝牙规格需要实现该接口。
+- [ ]  BluetoothHeadset: 蓝牙手持设备在移动设备上的支持
+- [ ]  BluetoothA2dp: Advanced Audio distribution Profile. 定义了一个蓝牙设备之间通信的高数据流的通信描述
+- [ ]  BluetoothHealth: 描述了一个控制蓝牙服务的健康设备描述  这三个是蓝牙接口规格在Android中三个系统实现实例。
+- [ ]  BluetoothProfile.ServiceListener  断开和连接service的连接服务时, 这个接口就知会BluetoothProfile IPC 客户端。用于BluetoothProfile
 在建立proxy时通过IPC控制设备的主要入口。
 
 蓝牙连接以及数据传输步骤说明:
