@@ -39,10 +39,10 @@
 Android平台通过Android蓝牙API来让开发者使用这样的技术支持。
 蓝牙（Bluetooth）提供移动设备及其配件之间低功耗、低成本的无线通信连接。
 蓝牙技术的核心，是根据蓝牙标准所实现的蓝牙协议栈。蓝牙能同时进行异步数据及同步语音传输，它在驱动层之上的底层协议层包括众多协议，
-如逻辑链路控制和适配协议（L2CAP）、服务发现协议（SDP）、串口模拟协议（RFCOMM）等，这些协议一起为更上层提供传输支持。
+如逻辑链路控制和适配协议（L2CAP,Logical Link Control and Adaption Protocol）、服务发现协议（SDP）、串口模拟协议（RFCOMM）等，这些协议一起为更上层提供传输支持。
 而主要控制接口则由主机控制接口层（HCI,Host Control Interface）体现，HCI是蓝牙协议中软硬件之间的接口。在各种协议及HCI之上，
 是蓝牙的上层应用框架，在框架中的单个应用模式称之为一个规范（Profile），便于连接外部不同类型的设备，
-如无线耳机使用的A2DP（Advanced Audio Distribution Profile）以及打印机使用的无线打印机服务等，服务有数十种之多。 
+如无线耳机使用的A2DP（Advanced Audio Distribution Profile）以及打印机使用的无线打印机服务等，服务有数十种之多。  
 
 用蓝牙技术,可以做到:
 > * 扫描其他蓝牙设备
@@ -69,9 +69,25 @@ Android技术架构:
 
 ·Linux内核的蓝牙协议层 
   包括: GAP, L2CAP, RFCOMM and SDP.
-
+  
+befor 4.2:
 ·bluez（运行在UserSpace） 
-运行在linux下的核心蓝牙层和协议。支持的协议包括:
+·bluez适配层 
+bluez在Android中的使用，需要经过Android的bluez适配层的封装来实现,适配层构造比较简单，封装了蓝牙的一些基本功能。
+D-BUS 本质上是IPC的一个实现
+after 4.2
+·Bluedroid
+4.2版本之后,android blue tooth更加符合Android系统的分层思想,分为协议,HAL等。
+![image](pic/ape_fwk_bluetooth.png)
+
+1. 4.2之前使用bluez 
+1. Bluetooth HAL从Android 4.2开始的新增模块，它由蓝牙核心规范硬件抽象层和蓝牙应用规范硬件抽象层组成。
+由于HAL层的隔离作用，上层代码可轻松移植到不同芯片平台。
+2. 作为整个蓝牙服务的核心，Bluetooth Stack模块则由Bluetooth Application Layer（缩写为BTA）
+和Bluetooth Embedded System（缩写为BTE）两大部分组成。
+3. 5.0开始全面支持BLE 
+
+支持的协议包括:
 
 | 支持的协议        | name   | 
 | :-------:   | :-----:  | 
@@ -125,9 +141,9 @@ FTP 文件传输规范
 
 HFP 免提规范
 
-·bluez适配层 
-bluez在Android中的使用，需要经过Android的bluez适配层的封装来实现,适配层构造比较简单，封装了蓝牙的一些基本功能。
 
+
+BlueDroid
 ·android.bluetooth包中的各个类（蓝牙在框架层的内容） 
 
 
@@ -244,31 +260,29 @@ get data:
 Android系统本身也实现了几个:
 服务方面支持耳机（Headset）、免提（Handsfree）和立体声（A2DP）等部分。 
 
-1. Headset. 
+  1. Headset. 
 
-2. A2DP. Advanced Audio Distribution Profile   立体声耳机等 定义了一个高质量的语音通道, 该语音通道的主要作用通过建立BluetoothA2dp 的一个类
+  2. A2DP. Advanced Audio Distribution Profile   立体声耳机等 定义了一个高质量的语音通道, 该语音通道的主要作用通过建立BluetoothA2dp 的一个类
   
-3. Health Device. 
+  3. Health Device. 
 以上三者都是建立一个代理proxy,来通过IPC控制一个service 完成后续的
 
 
-低功耗蓝牙:
-低功耗蓝牙主要用在功耗更小的环境下的蓝牙数据通信
-低功耗蓝牙BLE的几个主要概念
-GATT: 基于BLE的连接基础上发送并接收的短小数据块,目前所有的小功耗的应用规格profile都建立在GATT
+ 低功耗蓝牙:  
+低功耗蓝牙主要用在功耗更小的环境下的蓝牙数据通信  
+低功耗蓝牙BLE的几个主要概念  
+- [ ]GATT: 基于BLE的连接基础上发送并接收的短小数据块,目前所有的小功耗的应用规格profile都建立在GATT
 SIG协会为低功耗蓝牙定义了很多规范profile,规范profile就是一个设备怎样在一个特定应用上工作的规则。设备可以接收不止一个规范profile。
-ATT: GATT就是定义在ATT的基础之上,  ATT优化运行在BLE设备上。  为了达成这个目标,这种ATT属性尽可能的使用较少的字节描述。 每个属性特征
+- [ ]ATT: GATT就是定义在ATT的基础之上,  ATT优化运行在BLE设备上。  为了达成这个目标,这种ATT属性尽可能的使用较少的字节描述。 每个属性特征
 都由UUID定唯一确定的,这是一个128-bit格式的字符串ID来定义唯一的信息。 这个属性由ATT转移并格式成字符Characteristic和服务service。
 
-获取数据的几个概念:
-
+获取数据的几个概念:  
 1. 字符 Characteristic—字符包含了0到n个描述了字符值的描述符,一个字符可以被当作一个类型, 看成一个类而存在。
 2. 描述符 Descriptors,描述符定义了描述字符值的属性值
 3. 服务 service  刻画了一个字符集合
 
 
-连接 GATT Server
-
+连接 GATT Server  
 ```
 mBluetoothGatt = device.connectGatt(this, false, mGattCallback);
 ```
