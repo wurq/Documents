@@ -133,33 +133,29 @@ HFP 免提规范
 
 ##### . 从Android 4.2之前使用bluez的历程
 1.1 从Android1.5开始增加对Bluetooth的支持,开始支持A2DP [Advanced Audio Distribution Profile],
-AVCRP [Audio/Video Remote Control Profile],可以自动配对,提升免提体验。
-1.2 Android 2.2.x Froyo （API Level 8）开始,新增, Bluetooth 功能包括:
-    1.通过 Bluetooth 语音拨号
-    2.与其它设备分享联系人
-    3.支持车载 Bluetooth 和 Desk Docks
-    4.改善与车载套件和耳机的兼容性矩阵
-    
-1.3     Android 2.3.3/2.3.4 Gingerbread_MR1 / API Level 10  新增 API,添加了对 Bluetooth 非安全 Socket 连接的 platform 和 API 的支持。可以让那些不需要提供验证界面的应用通过简单的设备来通信
-    
-1.4  Android 3.0.x Honeycomb / API Level 11 
-    新增 Bluetooth 功能：
-    1.能让应用查询已经连接上 Bluetooth 设备的 Bluetooth Profile、音频状态等，然后通知用户
-    2.可以通过 Bluetooth 来连接全键盘
-    3.新增对 Bluetooth tethering 的支持意味着更多类型的设备能够共享 Android 设备的网络连接
-    新增 API：
-    1.允许应用检验已经连接上 Bluetooth A2DP 和 Headset Profile 的设备的状态，比如设备是否已经连接上或者设备当前的电量
+AVCRP [Audio/Video Remote Control Profile],可以自动配对,提升免提体验。  
+1.2 Android 2.2.x Froyo （API Level 8）开始,新增, Bluetooth 功能包括:  
+    1.通过 Bluetooth 语音拨号  
+    2.与其它设备分享联系人  
+    3.支持车载 Bluetooth 和 Desk Docks  
+    4.改善与车载套件和耳机的兼容性矩阵  
+1.3     Android 2.3.3/2.3.4 Gingerbread_MR1 / API Level 10  新增 API,添加了对 Bluetooth 非安全 Socket 连接的 platform 和 API 的支持。  
+1.4  Android 3.0.x Honeycomb ( API Level 11 )
+    新增 Bluetooth 功能：  
+    1. 能让应用查询已经连接上蓝牙设备的蓝牙规范,音频状态等，然后通知用户
+    2. 可以通过蓝牙来连接全键盘
+    新增 API：  
+    1. 允许应用检验已经连接上Bluetooth A2DP 和 Headset Profile 的设备的状态，比如设备是否已经连接上或者设备当前的电量
     2. Bluetooth 设备连接和断开时回调
    
- 1.5   Android 4.0/4.0.1/4.0.2 Ice Cream Sandwich / API Level 14
-    新增 Bluetooth 功能：
-    1.新增支持连接 Bluetooth HDP [Health Device Profile)] 设备，通过第三方应用的支持，用户可以连接到医院、健身中心或者家庭等场合中的无线医疗设备和传感器。
-    2.开发者可以使用 Android Beam (Android 自带 NFC 功能) 通过 Bluetooth 来实现连接和数据传输，不需要用户可视配对。
-    新增 API：
-    1.可以与 Bluetooth HDP [Health Device Profile)] 设备连接和通信。
+ 1.5   Android 4.0/4.0.1/4.0.2 Ice Cream Sandwich （ API Level 14）
+    新增 Bluetooth 功能：  
+    1. 新增支持连接 Bluetooth HDP （Health Device Profile）设备，通过第三方应用的支持，用户可以连接到医院、健身中心或者家庭等场合中的无线医疗设备和传感器。
+    2. 开发者可以使用 Android Beam (Android 自带 NFC 功能) 通过 Bluetooth 来实现连接和数据传输，不需要用户可视配对。
+    新增 API：  
+    1.可以与蓝牙 HDP（Health Device Profile）设备连接和通信。
   
-  BlueDroid
-      
+  
       
 #####  Android 4.2 Jeally Bean之后, google采用 BlueDroid
 4.2版本之后,android blue tooth更加符合Android系统的分层思想,分为协议,硬件抽象层等。
@@ -168,14 +164,14 @@ AVCRP [Audio/Video Remote Control Profile],可以自动配对,提升免提体验
     
 > *  引入了一种新的针对 Android 设备优化的 Bluetooth 协议栈 BlueDroid，从而取代 BlueZ 协议栈。Bluedroid 协议栈由 Google 和 Broadcom 公司共同开发，相对于 BlueZ 协议栈，BlueDroid 提升了兼容性和可靠性。
     
- Android 4.2 中 BlueDroid 框架包括以下几个部分：
-    1.应用程序通过 android.bluetooth 包下的API来调用系统的 Bluetooth 功能。
-    2.应用层空间增加了一个名为 Bluetooth 的 App。它作为系统的 Bluetooth 核心进程而存在。其内部将通过 JNI 来调用 Bluetooth HAL 层以完成各种蓝牙请求。
-    3.Bluetooth HAL 也属于 Android 4.2 新增模块，它由蓝牙核心规范硬件抽象层和蓝牙应用规范硬件抽象层组成。由于 HAL 层的隔离作用，上层代码可轻松移植到不同芯片平台。
-    4.作为整个蓝牙服务的核心，Bluetooth Stack 模块则由 Bluetooth Application Layer（BTA）和Bluetooth Embedded System（BTE）两大部分组成。
+ Android 4.2 中 BlueDroid 框架包括以下几个部分：  
+    1. 应用程序通过 android.bluetooth 包下的API来调用系统的 Bluetooth 功能。
+    2. 应用层空间增加了一个名为 Bluetooth 的 App。它作为系统的 Bluetooth 核心进程而存在。其内部将通过 JNI 来调用 Bluetooth HAL 层以完成各种蓝牙请求。
+    3. Bluetooth HAL 也属于 Android 4.2 新增模块，它由蓝牙核心规范硬件抽象层和蓝牙应用规范硬件抽象层组成。由于 HAL 层的隔离作用，上层代码可轻松移植到不同芯片平台。
+    4. 作为整个蓝牙服务的核心，Bluetooth Stack 模块则由 Bluetooth Application Layer（BTA）和Bluetooth Embedded System（BTE）两大部分组成。
     BTA 实现了蓝牙设备管理、状态管理及一些应用规范。而 BTE 则通过 HCI 与厂商蓝牙芯片交互以实现了蓝牙协议栈的通用功能和相关协议。
     另外，BTE 还包括统一内核接口（GKI），蓝牙芯片厂商可借助 GKI 快速轻松得移植蓝牙协议栈到其他操作系统或手机平台上。
-    5.Vendor Extentions（厂商扩展）：开发者可以添加自定义扩展以实现厂商特定的模块和组件。
+    5. Vendor Extentions（厂商扩展）：开发者可以添加自定义扩展以实现厂商特定的模块和组件。
     6. 5.0开始全面支持BLE 
 
 
